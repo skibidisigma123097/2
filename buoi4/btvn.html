@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [
+            {id: "1", ten: "skibidi"},
+            {id: "2", ten: "Control"},
+            {id: "3", ten: "N.T.B"},
+        ];
+
+        let idk = {id: "4", ten: "Gravity"}
+        arr.push(idk)
+        arr = arr.map(arr => {
+            if (arr.id === "1"){
+                return{...arr, ten: "Sigma"};
+            }
+            return arr;
+        });
+        console.log(...arr)
+        arr = arr.filter(item => item.id !== "1");
+        console.log(...arr)
+
+        let person = {
+            name: "GAY",
+            age: "UNDENIFIED",
+            city: "TP HCM"
+        }
+        person.email = "GAY1234@gmail.com"
+        delete person.age
+        console.log(person)
+    </script>
+</body>
+</html>

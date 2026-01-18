@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name: "Skibidi Sigma",
+            age: 15,
+            school: "THCS An Nhon",
+            hjws: "hsjasf",
+        };
+        person.gender = "helicopter"
+        if ("gender" in person){
+            console.log("yes")
+        }else {
+            console.log("no")
+        }
+        delete person.hjws
+        console.log(person.name)
+        console.log(person["age"])
+        for (let key in person) {
+            console.log(key,"co gia tri la:",person[key])
+        }
+    </script>
+</body>
+</html>

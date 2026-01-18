@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id = "username" placeholder="nhap username">
+    <br><br>
+    <input type="password" id = "password" placeholder="nhap mat khau">
+    <br><br>
+    <button onclick = "saveinfor()">luu du lieu</button>
+    <p id = "showinfor"></p>
+    <script>
+        function saveinfor(){
+            let name = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            console.log("tai khoan cua ban la:",name,"pass la",password)
+            let li = document.createElement("li");
+            li.innerText = "tai khoan cua ban la " + name + " pass la " + password
+            document.getElementById("showinfor").appendChild(li)
+
+            localStorage.setItem("name",name)
+            localStorate.setItem("pass",password)
+
+            let data = localStorage.getItem("name")
+            console.log(data)
+
+            localStorage.removeItem("pass")
+
+            let dstk = [
+                {username: "abc", pass: 12345},
+                {usrename: "cba", pass: 54321}
+            ];
+        };
+        localStorage.setItem("acc",JSON.stringify(dstk))
+        data = localStorage.getItem("acc")
+        console.log(JSON.parse(data))
+    </script>
+</body>
+</html>

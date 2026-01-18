@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function tinhtong(n) {
+            let result = 0
+            for (let i = 1; i <= n; i++) {
+                result += i
+            }
+            return result
+        }
+        console.log(tinhtong(10))
+
+
+        function songuyento(n) {
+            if (n < 2) {
+                console.log(n, "khong phai la so nguyen to");
+                return;
+            }
+
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) {
+                    console.log(n, "khong phai la so nguyen to");
+                    return;
+                }
+            }
+
+            console.log(n, "la so nguyen to");
+        }
+        songuyento(7);
+
+
+        function tinhgiaithua(n) {
+            let result = 1
+            for (let i = 1; i <= n; i++) {
+                result *= i
+            }
+            return result
+        }
+        console.log(tinhgiaithua(5))
+
+
+        function doinhietdo(input) {
+            input = input.trim();
+            const value = parseFloat(input);
+            if (isNaN(value)) {
+                return "gia tri dell hop le";
+            }
+            if (input.includes("°C") || input.toLowerCase().includes("c")) {
+                const f = value * 9 / 5 + 32;
+                return `${f.toFixed(2)} °F`;
+            }
+            if (input.includes("°F") || input.toLowerCase().includes("f")) {
+                const c = (value - 32) * 5 / 9;
+                return `${c.toFixed(2)} °C`;
+            }
+
+            return "khong xac dinh duoc don vi";
+        }
+
+        console.log(doinhietdo("45 C"))
+        console.log(doinhietdo("100 F"))
+    </script>
+</body>
+
+</html>

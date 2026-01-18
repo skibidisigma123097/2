@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background: #333;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card.revealed {
+            background-size: cover;
+        }
+
+        .card.matched {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Memory game</h2>
+    <p>Score: <span id="score">0</span></p>
+
+    <div class="grid" id="gameBoard"></div>
+
+    <script>
+        const cardsData = [
+            { name: "A", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEj6DbT9dMRCiXtuCVYCq900hvPrSDnFNG-w&s" },
+            { name: "B", img: "https://upload.wikimedia.org/wikipedia/en/thumb/0/09/Skibidi_toilet_screenshot.webp/237px-Skibidi_toilet_screenshot.webp.png" },
+            { name: "C", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4hcoHt11v9_FgUjNTA26abRMFZtAXAkHMkg&s" },
+            { name: "D", img: "https://i.pinimg.com/736x/5a/75/bf/5a75bf4dbae0e9bb6f6738fda942444b.jpg" },
+            { name: "E", img: "https://i.pinimg.com/236x/c0/b1/c4/c0b1c4a8b83253a97c96fc99297e7e18.jpg"},
+            { name: "F", img: "https://cdn.superkids.edu.vn/wp-content/uploads/2025/11/het-cuu-meme.webp"},
+        ];
+
+        let cards = [...cardsData, ...cardsData];
+        cards.sort(() => Math.random() - 0.5);
+
+
+        const board = document.getElementById("gameBoard");
+
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let score = 0;
+
+        cards.forEach(card => {
+            const cardEl = document.createElement("div");
+            cardEl.classList.add("card");
+
+            cardEl.dataset.name = card.name;
+            cardEl.dataset.image = card.img;
+
+            cardEl.addEventListener("click", () => flipCard(cardEl));
+            board.appendChild(cardEl);
+        });
+
+
+        function flipCard(card) {
+            if (lockBoard || card === firstCard) return;
+
+            card.classList.add("revealed");
+            card.style.backgroundImage = `url(${card.dataset.image})`;
+
+            if (!firstCard) {
+                firstCard = card;
+                return;
+            }
+
+            secondCard = card;
+            lockBoard = true;
+            checkMatch();
+        }
+
+        function checkMatch() {
+            const isMatch =
+                firstCard.dataset.name === secondCard.dataset.name;
+
+            if (isMatch) {
+                setTimeout(() => {
+                    alert("Nice, ban tim thay 1 cap")
+                    firstCard.classList.add("matched");
+                    secondCard.classList.add("matched");
+                    score++;
+                    document.getElementById("score").textContent = score;
+                    resetTurn();
+                }, 500);
+            } else {
+                setTimeout(() => {
+                    alert("Ga qua ko giong nhau");
+                    firstCard.classList.remove("revealed");
+                    secondCard.classList.remove("revealed");
+                    firstCard.style.backgroundImage = "";
+                    secondCard.style.backgroundImage = "";
+                    resetTurn();
+                }, 800);
+            }
+        }
+
+        function resetTurn() {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
+
+    </script>
+</body>
+
+</html>
